@@ -5,6 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bright Case Gallery</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Стиль для всей галереи */
+    .gallery {
+      max-width: 1200px; /* Максимальная ширина галереи */
+      margin: 0 auto; /* Центрируем галерею */
+      padding: 20px; /* Добавим отступы */
+      display: grid; /* Для сетки */
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Делаем два столбца или больше в зависимости от ширины экрана */
+      gap: 20px; /* Отступы между элементами */
+    }
+
+    /* Для изображений */
+    .gallery img {
+      width: 100%; /* Изображения будут адаптироваться по ширине контейнера */
+      max-width: 400px; /* Ограничим максимальную ширину изображений */
+      height: auto; /* Высота будет пропорциональна ширине */
+    }
+
+    /* Для видео */
+    .gallery video {
+      width: 100%; /* Видео будет адаптироваться по ширине контейнера */
+      max-width: 400px; /* Ограничим максимальную ширину видео */
+      height: auto; /* Высота будет пропорциональна ширине */
+    }
+
+    /* Для мобильных устройств */
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: 1fr; /* Один столбец на мобильных устройствах */
+      }
+
+      .gallery img, .gallery video {
+        max-width: 100%; /* Растягиваем изображения и видео на всю ширину контейнера */
+      }
+    }
+  </style>
 </head>
 <body>
   <header>

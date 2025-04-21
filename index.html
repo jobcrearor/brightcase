@@ -37,6 +37,12 @@
       flex-wrap: wrap;
     }
 
+    .trio {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
     .item {
       flex: 1 1 0;
     }
@@ -50,8 +56,20 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
+    .centered {
+      text-align: center;
+    }
+
+    .centered img {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
     @media (max-width: 768px) {
-      .pair {
+      .pair, .trio {
         flex-direction: column;
       }
     }
@@ -62,64 +80,95 @@
     <img src="logo.png" alt="Bright Case Logo" class="logo" />
   </header>
 
-  <!-- Горизонтальное фото перед галереей -->
-  <div style="text-align: center; margin: 0; padding: 0;">
-    <img src="images/Печатный силикон.png" alt="Печатный силикон" style="width: 100%; max-width: 1200px; height: auto; border-radius: 12px; display: block; margin: 0 auto;" />
-  </div>
-
   <main class="gallery">
-    <!-- Пары: фото и видео рядом -->
-    <div class="pair">
-      <div class="item"><img src="images/DSCF6178.jpeg" alt="Photo" /></div>
-      <div class="item">
-        <video autoplay muted loop playsinline>
-          <source src="videos/DSCF6190.mp4" type="video/mp4" />
-        </video>
-      </div>
+    <!-- Заголовок: софт -->
+    <div class="centered">
+      <img src="images/Заголовок софт.png" alt="Заголовок софт" />
     </div>
 
     <div class="pair">
-      <div class="item"><img src="images/DSCF6054.jpeg" alt="Photo" /></div>
-      <div class="item">
-        <video autoplay muted loop playsinline>
-          <source src="videos/DSCF6204.mp4" type="video/mp4" />
-        </video>
-      </div>
+      <div class="item"><img src="images/DSCF6246.jpeg" alt="" /></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6249.mp4" type="video/mp4" /></video></div>
+    </div>
+    <div class="pair">
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6230.mp4" type="video/mp4" /></video></div>
+      <div class="item"><img src="images/DSCF6226.jpeg" alt="" /></div>
+    </div>
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6178.jpeg" alt="" /></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6190.mp4" type="video/mp4" /></video></div>
+    </div>
+
+    <!-- Заголовок: силик -->
+    <div class="centered">
+      <img src="images/Заголовок силик.png" alt="Заголовок силик" />
+    </div>
+
+    <div class="centered">
+      <img src="images/DSCF6010.jpg" alt="" />
+    </div>
+
+    <div class="trio">
+      <div class="item"><img src="images/DSCF6106.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6093.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6043.jpeg" alt="" /></div>
     </div>
 
     <div class="pair">
-      <div class="item"><img src="images/DSCF6246.jpeg" alt="Photo" /></div>
-      <div class="item">
-        <video autoplay muted loop playsinline>
-          <source src="videos/DSCF6249.mp4" type="video/mp4" />
-        </video>
-      </div>
+      <div class="item"><img src="images/DSCF6091.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6108.jpeg" alt="" /></div>
+    </div>
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6137.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6144.jpeg" alt="" /></div>
+    </div>
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6054.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6162.jpeg" alt="" /></div>
+    </div>
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6157.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6121.jpeg" alt="" /></div>
     </div>
 
-    <!-- Остальные изображения -->
-    <div class="item"><img src="images/DSCF6010.jpg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6201.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6215.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6226.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6255.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6043.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6106.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6108.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6093.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6091.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6127.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6047.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6173.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6137.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6116.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6162.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6081.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6144.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6121.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6134.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6071.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6061.jpeg" alt="" /></div>
-    <div class="item"><img src="images/DSCF6157.jpeg" alt="" /></div>
+    <!-- Заголовок: матовый -->
+    <div class="centered">
+      <img src="images/Заголовок матовый.png" alt="Заголовок матовый" />
+    </div>
+
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6061.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6047.jpeg" alt="" /></div>
+    </div>
+
+    <div class="trio">
+      <div class="item"><img src="images/DSCF6081.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6134.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6116.jpeg" alt="" /></div>
+    </div>
+
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6127.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6071.jpeg" alt="" /></div>
+    </div>
+
+    <!-- Заголовок: лак -->
+    <div class="centered">
+      <img src="images/Заголовок лак.png" alt="Заголовок лак" />
+    </div>
+
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6215.jpeg" alt="" /></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6217.mp4" type="video/mp4" /></video></div>
+    </div>
+    <div class="pair">
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6267.mp4" type="video/mp4" /></video></div>
+      <div class="item"><img src="images/DSCF6255.jpeg" alt="" /></div>
+    </div>
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6201.jpeg" alt="" /></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6204.mp4" type="video/mp4" /></video></div>
+    </div>
   </main>
 </body>
 </html>

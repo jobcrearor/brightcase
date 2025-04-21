@@ -109,3 +109,9 @@ header {
   z-index: 1001;
 }
 
+@media (max-width: 768px) {
+  .pair, .trio {
+    flex-direction: column;
+  }
+}
+

@@ -149,6 +149,18 @@
       }
     }
 
+    @media (max-width: 480px) {
+      .gallery {
+        padding: 0 10px;
+      }
+      .pair, .trio {
+        flex-direction: row;
+      }
+      .item {
+        flex: 1 1 48%;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -157,7 +169,7 @@
 </header>
 <main class="gallery">
   <!-- ВСТАВЬ СЮДА КОНТЕНТ ГАЛЕРЕИ -->
-   <div class="centered">
+ <div class="centered">
     <img src="images/Заголовок софт.png" alt="Заголовок софт" />
   </div>
 
@@ -238,6 +250,7 @@
     <div class="item"><img src="images/DSCF6257.jpeg" alt="" loading="lazy" /></div>
   </div>
 </main>
+
 <!-- Модальное окно с возможностью прокрутки -->
 <div class="modal" id="modal">
   <div class="modal-content" id="modal-content"></div>
@@ -316,6 +329,23 @@
   });
   scrollBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Функция свайпа для мобильных устройств
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  modal.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  modal.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchStartX - touchEndX > 50) {
+      nextBtn.click(); // Свайп влево - следующий
+    } else if (touchEndX - touchStartX > 50) {
+      prevBtn.click(); // Свайп вправо - предыдущий
+    }
   });
 </script>
 </body>

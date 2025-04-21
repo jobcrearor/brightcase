@@ -143,6 +143,7 @@
       border-radius: 50%;
     }
 
+    /* Стили для мобильных устройств */
     @media (max-width: 768px) {
       .pair, .trio {
         flex-direction: column;
@@ -154,10 +155,16 @@
         padding: 0 10px;
       }
       .pair, .trio {
-        flex-direction: row;
+        flex-direction: column;
       }
       .item {
         flex: 1 1 48%;
+      }
+    }
+
+    @media (max-width: 480px) and (min-width: 360px) {
+      .gallery {
+        grid-template-columns: 1fr 1fr;
       }
     }
 
@@ -311,27 +318,28 @@
 
   // Обновление содержимого модального окна
   function updateModalContent() {
-    const newItem = items[currentIndex].cloneNode(true);
-    if (newItem.tagName === 'VIDEO') {
-      newItem.setAttribute('controls', '');
-      newItem.removeAttribute('autoplay');
-      newItem.removeAttribute('muted');
-      newItem.removeAttribute('loop');
+    const item = items[currentIndex];
+    const clone = item.cloneNode(true);
+    if (clone.tagName === 'VIDEO') {
+      clone.setAttribute('controls', '');
+      clone.removeAttribute('autoplay');
+      clone.removeAttribute('muted');
+      clone.removeAttribute('loop');
     }
     modalContent.innerHTML = '';
-    modalContent.appendChild(newItem);
+    modalContent.appendChild(clone);
   }
 
-  // Кнопка "Наверх"
-  const scrollBtn = document.getElementById('scrollTopBtn');
-  window.addEventListener('scroll', () => {
-    scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-  });
-  scrollBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Листание по стрелкам
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevBtn.click();
+    } else if (e.key === 'ArrowRight') {
+      nextBtn.click();
+    }
   });
 
-  // Функция свайпа для мобильных устройств
+  // Свайп на мобильных устройствах
   let touchStartX = 0;
   let touchEndX = 0;
 
@@ -341,11 +349,21 @@
 
   modal.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    if (touchStartX - touchEndX > 50) {
-      nextBtn.click(); // Свайп влево - следующий
-    } else if (touchEndX - touchStartX > 50) {
+    if (touchEndX - touchStartX > 50) {
       prevBtn.click(); // Свайп вправо - предыдущий
+    } else if (touchStartX - touchEndX > 50) {
+      nextBtn.click(); // Свайп влево - следующий
     }
+  });
+
+  // Кнопка "Наверх"
+  const scrollBtn = document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll', () => {
+    scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
 </body>

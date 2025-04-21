@@ -3,131 +3,368 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Галерея</title>
+  <title>Bright Case Gallery</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      background-color: #f7f7f7;
-      color: #111;
+      font-family: sans-serif;
+      background: #f9f9f9;
     }
 
     header {
-      padding: 30px 20px;
       text-align: center;
+      padding: 20px;
     }
 
-    header img {
-      max-width: 300px;
+    .logo {
+      max-width: 200px;
       height: auto;
     }
 
     .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 0 20px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 0 20px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
+    .pair,
+    .trio {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
     .item {
-      width: 100%;
-      overflow: hidden;
+      flex: 1 1 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 1s ease;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .item img,
     .item video {
       width: 100%;
       height: auto;
-      display: block;
       object-fit: cover;
-      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      loading: lazy;
     }
 
-    .item video {
-      aspect-ratio: 3 / 4;
+    .item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    .centered img {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      loading: lazy;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .modal-content img,
+    .modal-content video {
+      width: 100%;
+      height: auto;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+      z-index: 1001;
+    }
+
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1001;
+    }
+
+    .nav-btn {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      font-size: 24px;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    /* Стили для мобильных устройств */
+    @media (max-width: 768px) {
+      .pair, .trio {
+        flex-direction: column;
+      }
     }
 
     @media (max-width: 480px) {
-      header img {
-        max-width: 200px;
+      .gallery {
+        padding: 0 10px;
+      }
+      .pair, .trio {
+        flex-direction: column;
+      }
+      .item {
+        flex: 1 1 48%;
       }
     }
+
+    @media (max-width: 480px) and (min-width: 360px) {
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
   </style>
 </head>
 <body>
+<header>
+  <img src="logo.png" alt="Bright Case Logo" class="logo" />
+</header>
+<main class="gallery">
+  <!-- ВСТАВЬ СЮДА КОНТЕНТ ГАЛЕРЕИ -->
+ <div class="centered">
+    <img src="images/Заголовок софт.png" alt="Заголовок софт" />
+  </div>
 
-  <header>
-    <img src="images/logo.png" alt="Логотип" />
-  </header>
-
-  <main class="gallery">
-    <!-- Заголовок 1 -->
-    <div class="item" style="grid-column: 1 / -1; text-align: center;">
-      <img src="images/Заголовок софт.png" alt="Заголовок софт" />
-    </div>
-
+  <div class="pair">
     <div class="item"><img src="images/DSCF6246.jpeg" alt="" loading="lazy" /></div>
-    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6249.mp4" type="video/mp4" /></video></div>
-
-    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6230.mp4" type="video/mp4" /></video></div>
+    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6249.mp4" type="video/mp4" loading="lazy" /></video></div>
+  </div>
+  <div class="pair">
+    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6230.mp4" type="video/mp4" loading="lazy" /></video></div>
     <div class="item"><img src="images/DSCF6226.jpeg" alt="" loading="lazy" /></div>
-
+  </div>
+  <div class="pair">
     <div class="item"><img src="images/DSCF6178.jpeg" alt="" loading="lazy" /></div>
-    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6190.mp4" type="video/mp4" /></video></div>
+    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6190.mp4" type="video/mp4" loading="lazy" /></video></div>
+  </div>
 
-    <!-- Заголовок 2 -->
-    <div class="item" style="grid-column: 1 / -1; text-align: center;">
-      <img src="images/Заголовок силик.png" alt="Заголовок силик" />
-    </div>
+  <div class="centered">
+    <img src="images/Заголовок силик.png" alt="Заголовок силик" loading="lazy" />
+  </div>
 
-    <div class="item" style="grid-column: 1 / -1; text-align: center;">
-      <img src="images/DSCF6010.jpg" alt="" loading="lazy" />
-    </div>
+  <div class="centered">
+    <img src="images/DSCF6010.jpg" alt="" loading="lazy" />
+  </div>
 
+  <div class="trio">
     <div class="item"><img src="images/DSCF6106.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6093.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6043.jpeg" alt="" loading="lazy" /></div>
+  </div>
 
+  <div class="pair">
     <div class="item"><img src="images/DSCF6091.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6108.jpeg" alt="" loading="lazy" /></div>
-
+  </div>
+  <div class="pair">
     <div class="item"><img src="images/DSCF6137.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6144.jpeg" alt="" loading="lazy" /></div>
-
+  </div>
+  <div class="pair">
     <div class="item"><img src="images/DSCF6054.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6162.jpeg" alt="" loading="lazy" /></div>
-
+  </div>
+  <div class="pair">
     <div class="item"><img src="images/DSCF6157.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6121.jpeg" alt="" loading="lazy" /></div>
+  </div>
 
-    <!-- Заголовок 3 -->
-    <div class="item" style="grid-column: 1 / -1; text-align: center;">
-      <img src="images/Заголовок матовый.png" alt="Заголовок матовый" loading="lazy" />
-    </div>
+  <div class="centered">
+    <img src="images/Заголовок матовый.png" alt="Заголовок матовый" loading="lazy" />
+  </div>
 
+  <div class="pair">
     <div class="item"><img src="images/DSCF6061.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6047.jpeg" alt="" loading="lazy" /></div>
+  </div>
 
+  <div class="trio">
     <div class="item"><img src="images/DSCF6081.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6134.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6116.jpeg" alt="" loading="lazy" /></div>
+  </div>
 
+  <div class="pair">
     <div class="item"><img src="images/DSCF6127.jpeg" alt="" loading="lazy" /></div>
     <div class="item"><img src="images/DSCF6071.jpeg" alt="" loading="lazy" /></div>
+  </div>
 
-    <!-- Заголовок 4 -->
-    <div class="item" style="grid-column: 1 / -1; text-align: center;">
-      <img src="images/Заголовок лак.png" alt="Заголовок лак" loading="lazy" />
-    </div>
+  <div class="centered">
+    <img src="images/Заголовок лак.png" alt="Заголовок лак" loading="lazy" />
+  </div>
 
+  <div class="pair">
     <div class="item"><img src="images/DSCF6215.jpeg" alt="" loading="lazy" /></div>
-    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6217.mp4" type="video/mp4" /></video></div>
-
-    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6267.mp4" type="video/mp4" /></video></div>
+    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6217.mp4" type="video/mp4" loading="lazy" /></video></div>
+  </div>
+  <div class="pair">
+    <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6267.mp4" type="video/mp4" loading="lazy" /></video></div>
     <div class="item"><img src="images/DSCF6257.jpeg" alt="" loading="lazy" /></div>
-  </main>
+  </div>
+</main>
 
+<!-- Модальное окно с возможностью прокрутки -->
+<div class="modal" id="modal">
+  <div class="modal-content" id="modal-content"></div>
+  <div class="modal-nav">
+    <button class="nav-btn" id="prevBtn">&#8592;</button>
+    <button class="nav-btn" id="nextBtn">&#8594;</button>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTopBtn">↑</button>
+
+<script>
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modal-content');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  
+  let currentIndex = 0;
+  let items = [];
+
+  // Собираем все элементы (фото и видео) галереи
+  document.querySelectorAll('.item img, .item video').forEach(item => {
+    items.push(item);
+  });
+
+  // Открытие модального окна
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target.closest('.item img, .item video')) {
+      modal.style.display = 'flex';
+      const el = target.closest('img, video').cloneNode(true);
+      if (el.tagName === 'VIDEO') {
+        el.setAttribute('controls', '');
+        el.removeAttribute('autoplay');
+        el.removeAttribute('muted');
+        el.removeAttribute('loop');
+      }
+      modalContent.innerHTML = '';
+      modalContent.appendChild(el);
+      currentIndex = items.indexOf(target); // Устанавливаем текущий индекс
+    } else if (target === modal) {
+      modal.style.display = 'none';
+      modalContent.innerHTML = '';
+    }
+  });
+
+  // Переход к предыдущему элементу
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    updateModalContent();
+  });
+
+  // Переход к следующему элементу
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % items.length;
+    updateModalContent();
+  });
+
+  // Обновление содержимого модального окна
+  function updateModalContent() {
+    const item = items[currentIndex];
+    const clone = item.cloneNode(true);
+    if (clone.tagName === 'VIDEO') {
+      clone.setAttribute('controls', '');
+      clone.removeAttribute('autoplay');
+      clone.removeAttribute('muted');
+      clone.removeAttribute('loop');
+    }
+    modalContent.innerHTML = '';
+    modalContent.appendChild(clone);
+  }
+
+  // Листание по стрелкам
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevBtn.click();
+    } else if (e.key === 'ArrowRight') {
+      nextBtn.click();
+    }
+  });
+
+  // Свайп на мобильных устройствах
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  modal.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  modal.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchEndX - touchStartX > 50) {
+      prevBtn.click(); // Свайп вправо - предыдущий
+    } else if (touchStartX - touchEndX > 50) {
+      nextBtn.click(); // Свайп влево - следующий
+    }
+  });
+
+  // Кнопка "Наверх"
+  const scrollBtn = document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll', () => {
+    scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
 </body>
 </html>

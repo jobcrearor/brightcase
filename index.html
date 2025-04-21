@@ -31,12 +31,7 @@
       margin: 0 auto;
     }
 
-    .pair {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
+    .pair,
     .trio {
       display: flex;
       gap: 20px;
@@ -45,6 +40,7 @@
 
     .item {
       flex: 1 1 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .item img,
@@ -55,6 +51,12 @@
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       cursor: pointer;
+      loading: lazy;
+    }
+
+    .item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     }
 
     .centered {
@@ -67,6 +69,7 @@
       height: auto;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      loading: lazy;
     }
 
     .modal {
@@ -116,6 +119,16 @@
         flex-direction: column;
       }
     }
+
+    @media (max-width: 480px) {
+      .gallery {
+        padding: 0 10px;
+      }
+
+      .centered img {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -124,81 +137,94 @@
   </header>
 
   <main class="gallery">
+    <!-- ГАЛЕРЕЯ -->
+    <!-- Заголовок: софт -->
     <div class="centered">
-      <img src="images/Заголовок софт.png" alt="Заголовок софт" loading="lazy" />
+      <img src="images/Заголовок софт.png" alt="Заголовок софт" />
+    </div>
+
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6246.jpeg" alt="" /></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6249.mp4" type="video/mp4" /></video></div>
     </div>
     <div class="pair">
-      <div class="item"><img src="images/DSCF6246.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><video autoplay muted loop playsinline loading="lazy"><source src="videos/DSCF6249.mp4" type="video/mp4" /></video></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6230.mp4" type="video/mp4" /></video></div>
+      <div class="item"><img src="images/DSCF6226.jpeg" alt="" /></div>
     </div>
     <div class="pair">
-      <div class="item"><video autoplay muted loop playsinline loading="lazy"><source src="videos/DSCF6230.mp4" type="video/mp4" /></video></div>
-      <div class="item"><img src="images/DSCF6226.jpeg" alt="" loading="lazy" /></div>
+      <div class="item"><img src="images/DSCF6178.jpeg" alt="" /></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6190.mp4" type="video/mp4" /></video></div>
     </div>
-    <div class="pair">
-      <div class="item"><img src="images/DSCF6178.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><video autoplay muted loop playsinline loading="lazy"><source src="videos/DSCF6190.mp4" type="video/mp4" /></video></div>
+
+    <!-- Заголовок: силик -->
+    <div class="centered">
+      <img src="images/Заголовок силик.png" alt="Заголовок силик" />
     </div>
 
     <div class="centered">
-      <img src="images/Заголовок силик.png" alt="Заголовок силик" loading="lazy" />
+      <img src="images/DSCF6010.jpg" alt="" />
     </div>
-    <div class="centered">
-      <img src="images/DSCF6010.jpg" alt="" loading="lazy" />
-    </div>
+
     <div class="trio">
-      <div class="item"><img src="images/DSCF6106.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6093.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6043.jpeg" alt="" loading="lazy" /></div>
-    </div>
-    <div class="pair">
-      <div class="item"><img src="images/DSCF6091.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6108.jpeg" alt="" loading="lazy" /></div>
-    </div>
-    <div class="pair">
-      <div class="item"><img src="images/DSCF6137.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6144.jpeg" alt="" loading="lazy" /></div>
-    </div>
-    <div class="pair">
-      <div class="item"><img src="images/DSCF6054.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6162.jpeg" alt="" loading="lazy" /></div>
-    </div>
-    <div class="pair">
-      <div class="item"><img src="images/DSCF6157.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6121.jpeg" alt="" loading="lazy" /></div>
+      <div class="item"><img src="images/DSCF6106.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6093.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6043.jpeg" alt="" /></div>
     </div>
 
-    <div class="centered">
-      <img src="images/Заголовок матовый.png" alt="Заголовок матовый" loading="lazy" />
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6091.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6108.jpeg" alt="" /></div>
     </div>
     <div class="pair">
-      <div class="item"><img src="images/DSCF6061.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6047.jpeg" alt="" loading="lazy" /></div>
+      <div class="item"><img src="images/DSCF6137.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6144.jpeg" alt="" /></div>
     </div>
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6054.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6162.jpeg" alt="" /></div>
+    </div>
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6157.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6121.jpeg" alt="" /></div>
+    </div>
+
+    <!-- Заголовок: матовый -->
+    <div class="centered">
+      <img src="images/Заголовок матовый.png" alt="Заголовок матовый" />
+    </div>
+
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6061.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6047.jpeg" alt="" /></div>
+    </div>
+
     <div class="trio">
-      <div class="item"><img src="images/DSCF6081.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6134.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6116.jpeg" alt="" loading="lazy" /></div>
-    </div>
-    <div class="pair">
-      <div class="item"><img src="images/DSCF6127.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><img src="images/DSCF6071.jpeg" alt="" loading="lazy" /></div>
+      <div class="item"><img src="images/DSCF6081.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6134.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6116.jpeg" alt="" /></div>
     </div>
 
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6127.jpeg" alt="" /></div>
+      <div class="item"><img src="images/DSCF6071.jpeg" alt="" /></div>
+    </div>
+
+    <!-- Заголовок: лак -->
     <div class="centered">
-      <img src="images/Заголовок лак.png" alt="Заголовок лак" loading="lazy" />
+      <img src="images/Заголовок лак.png" alt="Заголовок лак" />
+    </div>
+
+    <div class="pair">
+      <div class="item"><img src="images/DSCF6215.jpeg" alt="" /></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6217.mp4" type="video/mp4" /></video></div>
     </div>
     <div class="pair">
-      <div class="item"><img src="images/DSCF6215.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><video autoplay muted loop playsinline loading="lazy"><source src="videos/DSCF6217.mp4" type="video/mp4" /></video></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6267.mp4" type="video/mp4" /></video></div>
+      <div class="item"><img src="images/DSCF6255.jpeg" alt="" /></div>
     </div>
     <div class="pair">
-      <div class="item"><video autoplay muted loop playsinline loading="lazy"><source src="videos/DSCF6267.mp4" type="video/mp4" /></video></div>
-      <div class="item"><img src="images/DSCF6255.jpeg" alt="" loading="lazy" /></div>
-    </div>
-    <div class="pair">
-      <div class="item"><img src="images/DSCF6201.jpeg" alt="" loading="lazy" /></div>
-      <div class="item"><video autoplay muted loop playsinline loading="lazy"><source src="videos/DSCF6204.mp4" type="video/mp4" /></video></div>
+      <div class="item"><img src="images/DSCF6201.jpeg" alt="" /></div>
+      <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6204.mp4" type="video/mp4" /></video></div>
     </div>
   </main>
 
@@ -212,24 +238,20 @@
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
 
-    document.querySelectorAll('.item img, .item video').forEach(el => {
-      el.setAttribute('loading', 'lazy');
-      el.addEventListener('click', () => {
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target.closest('.item img, .item video')) {
         modal.style.display = 'flex';
-        const clone = el.cloneNode(true);
-        if (clone.tagName === 'VIDEO') {
-          clone.setAttribute('controls', '');
-          clone.removeAttribute('autoplay');
-          clone.removeAttribute('muted');
-          clone.removeAttribute('loop');
+        const el = target.closest('img, video').cloneNode(true);
+        if (el.tagName === 'VIDEO') {
+          el.setAttribute('controls', '');
+          el.removeAttribute('autoplay');
+          el.removeAttribute('muted');
+          el.removeAttribute('loop');
         }
         modalContent.innerHTML = '';
-        modalContent.appendChild(clone);
-      });
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
+        modalContent.appendChild(el);
+      } else if (target === modal) {
         modal.style.display = 'none';
         modalContent.innerHTML = '';
       }

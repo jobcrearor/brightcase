@@ -26,11 +26,11 @@ header {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 0; /* Убираем скругления */
+  border-radius: 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 1s ease;
   opacity: 0;
   animation: fadeIn 1s ease forwards;
-  object-fit: contain; /* Изображение будет адаптироваться по размеру */
+  object-fit: contain;
 }
 
 .item:hover {
@@ -83,8 +83,11 @@ header {
 
 .modal-content img,
 .modal-content video {
-  width: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
   height: auto;
+  object-fit: contain;
 }
 
 /* Стиль для кнопки "Наверх" */

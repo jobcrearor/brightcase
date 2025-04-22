@@ -154,12 +154,6 @@ h1, .custom-header {
   }
 }
 
-@media (max-width: 480px) {
-  .item {
-    flex: 1 1 100%; /* Один элемент занимает всю ширину на маленьких экранах */
-  }
-}
-
   .centered img {
     max-width: 100%;
   }

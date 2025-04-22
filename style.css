@@ -32,12 +32,26 @@ h1, .custom-header {
 }
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   padding: 0 20px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.pair,
+.trio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.item {
+  flex: 1 1 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 1s ease;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
 }
 
 .item img,
@@ -46,9 +60,6 @@ h1, .custom-header {
   height: auto;
   display: block;
   border-radius: 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 1s ease;
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
   object-fit: contain;
 }
 
@@ -131,8 +142,25 @@ h1, .custom-header {
   z-index: 1001;
 }
 
+/* Адаптивность: сохраняем два столбца даже на мобилках */
 @media (max-width: 768px) {
   .pair, .trio {
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .item {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    padding: 0 10px;
+  }
+
+  .centered img {
+    max-width: 100%;
   }
 }

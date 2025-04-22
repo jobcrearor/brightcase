@@ -146,19 +146,19 @@ h1, .custom-header {
 @media (max-width: 768px) {
   .pair, .trio {
     flex-wrap: wrap;
-    flex-direction: row;
-    gap: 10px;
+    justify-content: space-between;
   }
 
   .item {
-    flex: 1 1 calc(50% - 10px);
+    flex: 1 1 calc(50% - 10px); /* Делаем элементы двумя колонками */
   }
 }
 
 @media (max-width: 480px) {
-  .gallery {
-    padding: 0 10px;
+  .item {
+    flex: 1 1 100%; /* Один элемент занимает всю ширину на маленьких экранах */
   }
+}
 
   .centered img {
     max-width: 100%;

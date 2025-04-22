@@ -272,11 +272,12 @@
     currentIndex = index;
     const el = galleryItems[index].cloneNode(true);
     if (el.tagName === 'VIDEO') {
-      el.setAttribute('controls', '');
-      el.removeAttribute('autoplay');
-      el.removeAttribute('muted');
-      el.removeAttribute('loop');
-    }
+  el.setAttribute('controls', '');
+  el.setAttribute('autoplay', '');
+  el.setAttribute('muted', '');
+  el.setAttribute('playsinline', '');
+  el.play();
+}
     modalContent.innerHTML = '';
     modalContent.appendChild(el);
     modal.style.display = 'flex';

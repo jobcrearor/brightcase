@@ -263,32 +263,88 @@
 <script>
   const modal = document.getElementById('modal');
   const modalContent = document.getElementById('modal-content');
+  const scrollBtn = document.getElementById('scrollTopBtn');
+
+  const galleryItems = Array.from(document.querySelectorAll('.item img, .item video'));
+  let currentIndex = -1;
+
+  function openModal(index) {
+    currentIndex = index;
+    const el = galleryItems[index].cloneNode(true);
+    if (el.tagName === 'VIDEO') {
+      el.setAttribute('controls', '');
+      el.removeAttribute('autoplay');
+      el.removeAttribute('muted');
+      el.removeAttribute('loop');
+    }
+    modalContent.innerHTML = '';
+    modalContent.appendChild(el);
+    modal.style.display = 'flex';
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    modalContent.innerHTML = '';
+    currentIndex = -1;
+  }
+
+  function showNext() {
+    if (currentIndex < galleryItems.length - 1) openModal(currentIndex + 1);
+  }
+
+  function showPrev() {
+    if (currentIndex > 0) openModal(currentIndex - 1);
+  }
 
   document.addEventListener('click', (e) => {
     const target = e.target;
+
     if (target.closest('.item img, .item video')) {
-      modal.style.display = 'flex';
-      const el = target.closest('img, video').cloneNode(true);
-      if (el.tagName === 'VIDEO') {
-        el.setAttribute('controls', '');
-        el.removeAttribute('autoplay');
-        el.removeAttribute('muted');
-        el.removeAttribute('loop');
-      }
-      modalContent.innerHTML = '';
-      modalContent.appendChild(el);
+      const clicked = target.closest('img, video');
+      currentIndex = galleryItems.findIndex(el => el === clicked);
+      openModal(currentIndex);
     } else if (target === modal) {
-      modal.style.display = 'none';
-      modalContent.innerHTML = '';
+      closeModal();
+    } else if (modal.style.display === 'flex' && target === modalContent.firstChild) {
+      const rect = target.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      if (clickX < rect.width / 2) showPrev();
+      else showNext();
     }
   });
 
-  const scrollBtn = document.getElementById('scrollTopBtn');
+  window.addEventListener('keydown', (e) => {
+    if (modal.style.display === 'flex') {
+      if (e.key === 'ArrowRight') showNext();
+      else if (e.key === 'ArrowLeft') showPrev();
+      else if (e.key === 'Escape') closeModal();
+    }
+  });
+
+  scrollBtn.style.display = 'none';
   window.addEventListener('scroll', () => {
     scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
   });
   scrollBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Свайп (тач)
+  let touchStartX = null;
+
+  modal.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  modal.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    let touchEndX = e.changedTouches[0].screenX;
+    let diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) showNext(); // свайп влево
+      else showPrev(); // свайп вправо
+    }
+    touchStartX = null;
   });
 </script>
 </body>

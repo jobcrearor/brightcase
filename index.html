@@ -6,9 +6,16 @@
   <title>Bright Case Gallery</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    @font-face {
+      font-family: 'Codec Pro Light Italic';
+      src: url('fonts/CodecPro-LightItalic.woff') format('woff');
+      font-style: italic;
+      font-weight: 300;
+    }
+
     body {
       margin: 0;
-      font-family: sans-serif;
+      font-family: 'Codec Pro Light Italic', sans-serif;
       background: #f9f9f9;
     }
 
@@ -63,7 +70,6 @@
       object-fit: cover;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       cursor: pointer;
-      loading: lazy;
     }
 
     .item:hover {
@@ -75,12 +81,10 @@
       text-align: center;
     }
 
-    .centered img {
-      max-width: 600px;
-      width: 100%;
-      height: auto;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      loading: lazy;
+    .custom-header {
+      font-size: 2.5rem;
+      margin: 20px 0;
+      font-family: 'Codec Pro Light Italic', sans-serif;
     }
 
     .modal {
@@ -124,26 +128,6 @@
       z-index: 1001;
     }
 
-    .modal-nav {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      z-index: 1001;
-    }
-
-    .nav-btn {
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;
-      border: none;
-      font-size: 24px;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 50%;
-    }
-
-    /* Стили для мобильных устройств */
     @media (max-width: 768px) {
       .pair, .trio {
         flex-direction: column;
@@ -154,20 +138,11 @@
       .gallery {
         padding: 0 10px;
       }
-      .pair, .trio {
-        flex-direction: column;
-      }
-      .item {
-        flex: 1 1 48%;
+
+      .centered img {
+        max-width: 100%;
       }
     }
-
-    @media (max-width: 480px) and (min-width: 360px) {
-      .gallery {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
   </style>
 </head>
 <body>
@@ -175,9 +150,8 @@
   <img src="logo.png" alt="Bright Case Logo" class="logo" />
 </header>
 <main class="gallery">
-  <!-- ВСТАВЬ СЮДА КОНТЕНТ ГАЛЕРЕИ -->
- <div class="centered">
-    <img src="images/Заголовок софт.png" alt="Заголовок софт" />
+  <div class="centered">
+    <h2 class="custom-header">Soft Touch с лаковым принтом</h2>
   </div>
 
   <div class="pair">
@@ -194,11 +168,11 @@
   </div>
 
   <div class="centered">
-    <img src="images/Заголовок силик.png" alt="Заголовок силик" loading="lazy" />
+    <h2 class="custom-header">Силиконовые чехлы</h2>
   </div>
 
   <div class="centered">
-    <img src="images/DSCF6010.jpg" alt="" loading="lazy" />
+    <div class="item"><img src="images/DSCF6010.jpg" alt="" loading="lazy" /></div>
   </div>
 
   <div class="trio">
@@ -225,7 +199,7 @@
   </div>
 
   <div class="centered">
-    <img src="images/Заголовок матовый.png" alt="Заголовок матовый" loading="lazy" />
+    <h2 class="custom-header">Черные матовые чехлы</h2>
   </div>
 
   <div class="pair">
@@ -245,7 +219,7 @@
   </div>
 
   <div class="centered">
-    <img src="images/Заголовок лак.png" alt="Заголовок лак" loading="lazy" />
+    <h2 class="custom-header">Силиконовые чехлы с лаковым принтом</h2>
   </div>
 
   <div class="pair">
@@ -257,33 +231,14 @@
     <div class="item"><img src="images/DSCF6257.jpeg" alt="" loading="lazy" /></div>
   </div>
 </main>
-
-<!-- Модальное окно с возможностью прокрутки -->
 <div class="modal" id="modal">
   <div class="modal-content" id="modal-content"></div>
-  <div class="modal-nav">
-    <button class="nav-btn" id="prevBtn">&#8592;</button>
-    <button class="nav-btn" id="nextBtn">&#8594;</button>
-  </div>
 </div>
-
 <button class="scroll-top" id="scrollTopBtn">↑</button>
-
 <script>
   const modal = document.getElementById('modal');
   const modalContent = document.getElementById('modal-content');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  
-  let currentIndex = 0;
-  let items = [];
 
-  // Собираем все элементы (фото и видео) галереи
-  document.querySelectorAll('.item img, .item video').forEach(item => {
-    items.push(item);
-  });
-
-  // Открытие модального окна
   document.addEventListener('click', (e) => {
     const target = e.target;
     if (target.closest('.item img, .item video')) {
@@ -297,71 +252,16 @@
       }
       modalContent.innerHTML = '';
       modalContent.appendChild(el);
-      currentIndex = items.indexOf(target); // Устанавливаем текущий индекс
     } else if (target === modal) {
       modal.style.display = 'none';
       modalContent.innerHTML = '';
     }
   });
 
-  // Переход к предыдущему элементу
-  prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
-    updateModalContent();
-  });
-
-  // Переход к следующему элементу
-  nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % items.length;
-    updateModalContent();
-  });
-
-  // Обновление содержимого модального окна
-  function updateModalContent() {
-    const item = items[currentIndex];
-    const clone = item.cloneNode(true);
-    if (clone.tagName === 'VIDEO') {
-      clone.setAttribute('controls', '');
-      clone.removeAttribute('autoplay');
-      clone.removeAttribute('muted');
-      clone.removeAttribute('loop');
-    }
-    modalContent.innerHTML = '';
-    modalContent.appendChild(clone);
-  }
-
-  // Листание по стрелкам
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      prevBtn.click();
-    } else if (e.key === 'ArrowRight') {
-      nextBtn.click();
-    }
-  });
-
-  // Свайп на мобильных устройствах
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  modal.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
-  modal.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    if (touchEndX - touchStartX > 50) {
-      prevBtn.click(); // Свайп вправо - предыдущий
-    } else if (touchStartX - touchEndX > 50) {
-      nextBtn.click(); // Свайп влево - следующий
-    }
-  });
-
-  // Кнопка "Наверх"
   const scrollBtn = document.getElementById('scrollTopBtn');
   window.addEventListener('scroll', () => {
     scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
   });
-
   scrollBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });

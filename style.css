@@ -68,6 +68,11 @@ h1, .custom-header {
   text-align: center;
 }
 
+.centered .item {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 /* Анимация появления */
 @keyframes fadeIn {
   from {

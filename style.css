@@ -145,16 +145,15 @@ h1, .custom-header {
 /* Адаптивность: сохраняем два столбца даже на мобилках */
 @media (max-width: 768px) {
   .pair, .trio {
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-wrap: nowrap; /* Убираем перенос элементов на мобильных */
+    justify-content: space-between; /* Прокладываем равные промежутки */
   }
 
   .item {
-    flex: 1 1 calc(50% - 10px); /* Делаем элементы двумя колонками */
+    flex: 1 1 calc(50% - 10px); /* Сохраняем два столбца на мобильных */
   }
 }
 
-  .centered img {
-    max-width: 100%;
-  }
+.centered img {
+  max-width: 100%; /* Обрезаем изображения под ширину экрана */
 }

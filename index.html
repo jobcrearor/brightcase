@@ -78,13 +78,13 @@
     }
 
     .centered {
-  text-align: center;
-}
+      text-align: center;
+    }
 
-.centered .item {
-  max-width: 600px;
-  margin: 0 auto;
-}
+    .centered .item {
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
     .custom-header {
       font-size: 2.5rem;
@@ -115,6 +115,27 @@
     .modal-content video {
       width: 100%;
       height: auto;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 48px;
+      color: white;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1002;
+      user-select: none;
+    }
+
+    #arrow-left {
+      left: 20px;
+    }
+
+    #arrow-right {
+      right: 20px;
     }
 
     .scroll-top {
@@ -153,8 +174,8 @@
 <body>
 <header>
   <a href="https://www.wildberries.ru/seller/1410416">
-  <img src="logo.png" alt="Bright Case Logo" class="logo" />
-</a>
+    <img src="logo.png" alt="Bright Case Logo" class="logo" />
+  </a>
 </header>
 <main class="gallery">
   <div class="centered">
@@ -261,15 +282,18 @@
     <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6362.mp4" type="video/mp4" loading="lazy" /></video></div>
     <div class="item"><video autoplay muted loop playsinline><source src="videos/DSCF6322.mp4" type="video/mp4" loading="lazy" /></video></div>
   </div>
-  </main>
 <div class="modal" id="modal">
+  <button id="arrow-left" class="arrow">&#8592;</button>
   <div class="modal-content" id="modal-content"></div>
+  <button id="arrow-right" class="arrow">&#8594;</button>
 </div>
 <button class="scroll-top" id="scrollTopBtn">↑</button>
 <script>
   const modal = document.getElementById('modal');
   const modalContent = document.getElementById('modal-content');
   const scrollBtn = document.getElementById('scrollTopBtn');
+  const leftArrow = document.getElementById('arrow-left');
+  const rightArrow = document.getElementById('arrow-right');
 
   const galleryItems = Array.from(document.querySelectorAll('.item img, .item video'));
   let currentIndex = -1;
@@ -277,16 +301,21 @@
   function openModal(index) {
     currentIndex = index;
     const el = galleryItems[index].cloneNode(true);
+
     if (el.tagName === 'VIDEO') {
-  el.setAttribute('controls', '');
-  el.setAttribute('autoplay', '');
-  el.setAttribute('muted', '');
-  el.setAttribute('playsinline', '');
-  el.play();
-}
+      el.setAttribute('controls', '');
+      el.setAttribute('autoplay', '');
+      el.setAttribute('muted', '');
+      el.setAttribute('playsinline', '');
+      el.play();
+    }
+
     modalContent.innerHTML = '';
     modalContent.appendChild(el);
     modal.style.display = 'flex';
+
+    leftArrow.style.display = index === 0 ? 'none' : 'block';
+    rightArrow.style.display = index === galleryItems.length - 1 ? 'none' : 'block';
   }
 
   function closeModal() {
@@ -320,6 +349,9 @@
     }
   });
 
+  leftArrow.addEventListener('click', showPrev);
+  rightArrow.addEventListener('click', showNext);
+
   window.addEventListener('keydown', (e) => {
     if (modal.style.display === 'flex') {
       if (e.key === 'ArrowRight') showNext();
@@ -336,7 +368,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // Свайп (тач)
   let touchStartX = null;
 
   modal.addEventListener('touchstart', (e) => {
@@ -348,8 +379,8 @@
     let touchEndX = e.changedTouches[0].screenX;
     let diff = touchStartX - touchEndX;
     if (Math.abs(diff) > 50) {
-      if (diff > 0) showNext(); // свайп влево
-      else showPrev(); // свайп вправо
+      if (diff > 0) showNext();
+      else showPrev();
     }
     touchStartX = null;
   });
